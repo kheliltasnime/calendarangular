@@ -1,0 +1,56 @@
+/* Style pour le conteneur du calendrier */
+#calendar-container {
+  display: flex;
+  flex-direction: column;
+  width: 80vw; /* Utilisation de la largeur de la fenêtre */
+  height: 80vh; /* Utilisation de la hauteur de la fenêtre */
+}
+
+/* Styles pour les boutons de navigation et les vues du calendrier */
+#cal-buttons {
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center; /* Centre les boutons horizontalement */
+}
+
+#cal-date-nav-buttons,
+#cal-view-nav-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Répartit l'espace entre les boutons */
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#cal-date-field {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center; /* Centre le texte horizontalement */
+}
+
+mwl-calendar-month-view,
+mwl-calendar-week-view,
+mwl-calendar-day-view {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+  width: calc(100% - 40px); /* Utilisation de 100% moins la marge des deux côtés */
+  max-width: 500px; /* Limite la largeur maximale pour éviter l'élargissement excessif */
+}
+
+mwl-calendar-day-view {
+  margin-left: 20px; /* Ajoute une marge à gauche pour espacer du bord de la fenêtre */
+}
