@@ -8,12 +8,14 @@ import { ChartsComponent } from './private/components/charts/charts.component';
 import { CalendarComponent } from './private/components/calendar/calendar.component';
 import { HistoryComponent } from './private/components/history/history.component';
 import { BenefitComponent } from './private/components/benefit/benefit.component';
-
+import { CalendarempComponent } from './private/employe/components/calendaremp/calendaremp.component';
+import { ReservationComponent } from './private/employe/components/reservation/reservation.component';
 const routes: Routes = [
   {
     path: 'employee',
     component: EmployeeComponent,
   },
+  
   {
     path: 'employee/:id',
     component:DetailsEmployeeComponent
@@ -29,6 +31,7 @@ const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarComponent,
+
   },
   {
     path: 'history',
@@ -43,6 +46,14 @@ const routes: Routes = [
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
+  {path:'calendaremp',
+  component:CalendarempComponent,
+  },
+  
+  {
+    path:'reservation',
+    component:ReservationComponent,
+  }
   
 ];
 

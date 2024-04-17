@@ -21,6 +21,7 @@ export const navbarData = [
   { path: '/history', title: 'History',  icon: 'fal fa-history', class: '' },
   { path: '/employee', title: 'Employee',  icon: 'fal fa-user', class: '' },
   { path: '/benefit', title: 'Benefit',  icon: 'fal fa-box-open', class: '' },
+  { path: '/reservation', title: 'Reservation',  icon: 'fal fa-box-open', class: '' },
 ];
 
 @Component({

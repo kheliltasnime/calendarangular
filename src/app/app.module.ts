@@ -22,8 +22,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { ScheduleModule, RecurrenceEditorModule } from '@syncfusion/ej2-angular-schedule'
-
+import { ScheduleModule, RecurrenceEditorModule } from '@syncfusion/ej2-angular-schedule';
+//import { EmployeComponent } from './private/employe/employe/employe.component';
+import { CalendarempComponent } from './private/employe/components/calendaremp/calendaremp.component';
+import { ReservationComponent } from './private/employe/components/reservation/reservation.component'
+//import { CalendarempComponent } from './private/employe/components/calendaremp/calendaremp.component';
 
 @NgModule({
   declarations: [
@@ -34,10 +37,14 @@ import { ScheduleModule, RecurrenceEditorModule } from '@syncfusion/ej2-angular-
     HomeComponent,
     DashboardComponent,
     ChartsComponent,
+    CalendarempComponent,
     CalendarComponent,
     HistoryComponent,
     BenefitComponent,
-    HeaderComponent
+    HeaderComponent,
+   // EmployeComponent,
+    CalendarempComponent,
+   ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,7 @@ import { ScheduleModule, RecurrenceEditorModule } from '@syncfusion/ej2-angular-
     ReactiveFormsModule,
     MatFormFieldModule,
     OverlayModule,
+    CommonModule,
     CdkMenuModule,
     
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
