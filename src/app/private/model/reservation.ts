@@ -1,12 +1,10 @@
-export interface Reservation{
-    id? : number;
-    date_debut? : Date;
-    date_fin? : Date;
-    reference? : string;
-    description? : string;
-    status? :boolean;
-    createdAt? : Date;
-    updatedAt? : Date;
-    date:Date;
-    
-}
+export interface Reservation {
+    id: number;
+    room: string;
+    equipements: string[];
+    date: Date;
+    date_debut: Date;
+    date_fin: Date;
+    status: boolean;
+  }
+  
