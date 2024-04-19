@@ -1,13 +1,15 @@
 <div class="container">
   <input type="text" class="form-control mb-3" placeholder="Search..." [(ngModel)]="searchText" (input)="filterLists()">
-  
+  <input type="date" class="form-control mb-3" placeholder="Search by date" [(ngModel)]="searchDate" (change)="filterLists()">
+  <!-- Champ de saisie pour la recherche par date -->
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th style="width: 22.22%;">Room</th>
         <th style="width: 22.22%;">Equipment</th>
-        <th style="width: 22.22%;">Status</th> 
-        <th style="width: 100 px;">Action</th>
+        <th style="width: 22.22%;">Actions</th> <!-- Colonnes visibles par défaut -->
+        <th style="width: 22.22%;" *ngIf="showStatusColumn">Status</th> <!-- Colonne "Status" conditionnellement affichée -->
+        <th *ngIf="showDateOccupationColumn">Date d'occupation</th> <!-- Colonne "Date d'occupation" conditionnellement affichée -->
       </tr>
     </thead>
     <tbody>
@@ -15,11 +17,13 @@
         <tr *ngFor="let room of filteredRoomList">
           <td>{{ room.name }}</td>
           <td>{{ room.equipment || '' }}</td>
-          <td>{{ room.status }}</td> 
           <td>
             <button class="btn btn-primary mr-2" (click)="openReservationDialog(room)">Add to Reservation</button>
             <button *ngIf="room.status === 'Occupied'" class="btn btn-secondary" (click)="checkCalendar(room)">Check Calendar</button>
           </td>
+          <!-- Masquer les cellules de status et de date si les colonnes correspondantes ne sont pas affichées -->
+          <td *ngIf="showStatusColumn">{{ room.status }}</td> 
+          <td *ngIf="showDateOccupationColumn">{{ room.startDate && room.endDate ? room.startDate + ' to ' + room.endDate : null }}</td>
         </tr>
       </ng-container>
       
