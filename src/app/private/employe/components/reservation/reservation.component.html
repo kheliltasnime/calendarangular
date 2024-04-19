@@ -4,9 +4,10 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th style="width: 33.33%;">Room</th>
-        <th style="width: 33.33%;">Equipment</th>
-        <th style="width: 33.33%;">Action</th>
+        <th style="width: 22.22%;">Room</th>
+        <th style="width: 22.22%;">Equipment</th>
+        <th style="width: 22.22%;">Status</th> 
+        <th style="width: 100 px;">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -14,9 +15,14 @@
         <tr *ngFor="let room of filteredRoomList">
           <td>{{ room.name }}</td>
           <td>{{ room.equipment || '' }}</td>
-          <td><button class="btn btn-primary" (click)="addToReservationList('room', room)">Add to Reservation</button></td>
+          <td>{{ room.status }}</td> 
+          <td>
+            <button class="btn btn-primary mr-2" (click)="openReservationDialog(room)">Add to Reservation</button>
+            <button *ngIf="room.status === 'Occupied'" class="btn btn-secondary" (click)="checkCalendar(room)">Check Calendar</button>
+          </td>
         </tr>
       </ng-container>
+      
     </tbody>
   </table>
 </div>
@@ -24,3 +30,16 @@
 <ng-template #noResultsTemplate>
   <p>No results found.</p>
 </ng-template>
+<div class="reservation-dialog" *ngIf="isReservationDialogOpen">
+  <h2>Reservation Details</h2>
+  <p>Room: {{ selectedRoom?.name }}</p>
+  <p>Equipment: {{ selectedRoom?.equipment  }}</p>
+  <label for="startDate">Start Date:</label>
+  <input type="date" id="startDate" [(ngModel)]="startDate">
+  <label for="endDate">End Date:</label>
+  <input type="date" id="endDate" [(ngModel)]="endDate">
+  <button class="close-btn" (click)="closeReservationDialog()">Cancel</button>
+  <button (click)="confirmReservation()">Confirm Reservation</button>
+</div>
+
+  

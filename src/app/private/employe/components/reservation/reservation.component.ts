@@ -16,16 +16,21 @@ export class ReservationComponent {
   searchText: string = '';
   filteredRoomList: Room[] = [];
   filteredEquipmentList: any[] = [];
+  
 
+  selectedRoom: any;
+  startDate: string = '';
+  endDate: string = '';
+  isReservationDialogOpen: boolean = false;
   constructor() {
     // Exemples de rooms et d'équipements
     this.roomList = [
-      { name: 'Room 1' },
-      { name: 'Room 2', equipment: 'Projector' },
-      { name: 'Room 3' },
-      { name: 'Room 4', equipment: 'Whiteboard' },
-      { name: 'Room 5' },
-      { name: 'Room 6', equipment: 'Microphone' },
+      { name: 'Room 1',status: 'Available' },
+      { name: 'Room 2', equipment: 'Projector' ,status: 'Occupied'},
+      { name: 'Room 3',status: 'Available' },
+      { name: 'Room 4', equipment: 'Whiteboard' ,status: 'Available'},
+      { name: 'Room 5',status: 'Available' },
+      { name: 'Room 6', equipment: 'Microphone' ,status: 'Available'},
       // Ajoutez d'autres exemples de rooms avec et sans équipement si nécessaire
     ];
 
@@ -66,5 +71,32 @@ export class ReservationComponent {
     // Ajoutez l'élément sélectionné à votre liste de réservations
     console.log('Added to reservation list:', type, item);
   }
+  openReservationDialog(room: any): void {
+    // Logique pour ouvrir la fenêtre contextuelle et afficher les détails de la réservation
+    this.selectedRoom = room; // Stockez la room sélectionnée
+    this.startDate = ''; // Réinitialisez la date de début
+    this.endDate = ''; // Réinitialisez la date de fin
+    this.isReservationDialogOpen = true; // Ouvrez la fenêtre contextuelle
+  }
 
+  closeReservationDialog(): void {
+    // Logique pour fermer la fenêtre contextuelle
+    this.isReservationDialogOpen = false;
+  }
+  // Méthode de confirmation de la réservation
+  confirmReservation(): void {
+    // Effectuez les actions nécessaires pour confirmer la réservation
+    console.log('Reservation confirmed:', this.selectedRoom, 'Start Date:', this.startDate, 'End Date:', this.endDate);
+    this.isReservationDialogOpen = false; // Fermez la fenêtre contextuelle après confirmation
+  }
+
+  checkCalendar(room: Room): void {
+    // Implémentez ici la logique pour gérer l'action de vérification du calendrier
+    console.log('Checking calendar for room:', room.name);
+    // Par exemple, vous pouvez rediriger l'utilisateur vers une autre page ou afficher un message de confirmation
+  }
+
+
+
+  
 }
