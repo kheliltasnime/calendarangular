@@ -29,7 +29,7 @@ export class ReservationComponent {
   startDate: string = '';
   endDate: string = '';
   isReservationDialogOpen: boolean = false;
-  constructor() {
+  constructor(private reservationService: ReservationService) {
     // Exemples de rooms et d'équipements
     
     this.roomList = [

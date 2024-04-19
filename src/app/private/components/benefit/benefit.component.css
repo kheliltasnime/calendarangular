@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #007bff; /* Bleu */
+    color: #ffffff; /* Blanc */
+  }
+  
+  thead th {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Blanc */
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Blanc */
+  }
+  
+  tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #dddddd; /* Gris */
+  }
+  
+  tbody td:last-child {
+    border-bottom: none; /* Supprime la bordure du dernier td dans chaque ligne */
+  }
+  
