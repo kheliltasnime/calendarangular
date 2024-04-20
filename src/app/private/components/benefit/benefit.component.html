@@ -2,15 +2,28 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Date de début</th>
-        <th>Date de fin</th>
-        <th>Heure de début</th>
-        <th>Heure de fin</th>
-        <th>Élément sélectionné</th>
+        <th>Room</th>
+        <th>Equipments</th>
+        <th>Date</th>
+        <th>Date Début</th>
+        <th>Date Fin</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Les données seront ajoutées dynamiquement ici -->
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ reservation.id }}</td>
+        <td>{{ reservation.room }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let equipment of reservation.equipements">{{ equipment }}</li>
+          </ul>
+        </td>
+        <td>{{ reservation.date | date }}</td>
+        <td>{{ reservation.date_debut | date }}</td>
+        <td>{{ reservation.date_fin | date }}</td>
+        <td>{{ reservation.status ? 'Confirmed' : 'Not Confirmed' }}</td>
+      </tr>
     </tbody>
   </table>
   

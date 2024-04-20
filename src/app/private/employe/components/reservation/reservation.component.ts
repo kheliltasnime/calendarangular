@@ -91,8 +91,6 @@ export class ReservationComponent {
   }
   
   
-  
-  
   isRoomAvailableForDate(room: Room, searchDate: Date): boolean {
     // Vérifiez si la chambre est déjà occupée
     if (room.status === 'Occupied' && room.startDate && room.endDate) {
@@ -134,12 +132,28 @@ closeReservationDialog(): void {
   this.isReservationDialogOpen = false;
 }
 
-// Méthode de confirmation de la réservation
 confirmReservation(): void {
-  // Effectuez les actions nécessaires pour confirmer la réservation
-  console.log('Reservation confirmed:', this.selectedRoom, 'Start Date:', this.startDate, 'End Date:', this.endDate);
-  this.isReservationDialogOpen = false; // Fermez la fenêtre contextuelle après confirmation
+  // Créer un objet de type Reservation avec les détails de la réservation
+  const reservation: Reservation = {
+    id: this.generateId(), // Générez un identifiant unique
+    room: this.selectedRoom.name,
+    equipements: this.selectedRoom.equipment ? [this.selectedRoom.equipment] : [],
+    date: new Date(), // Utilisez la date actuelle pour la date de réservation
+    date_debut: new Date(this.startDate),
+    date_fin: new Date(this.endDate),
+    status: true // Supposons que la réservation est confirmée
+  };
+
+  // Appeler la méthode addReservation du service de réservation pour ajouter la réservation
+  this.reservationService.addReservation(reservation);
+
+  // Afficher un message de confirmation dans la console
+  console.log('Reservation confirmed:', reservation);
+
+  // Fermez la fenêtre contextuelle après confirmation
+  this.isReservationDialogOpen = false;
 }
+
 checkCalendar(room: Room): void {
   if (room.status === 'Occupied' && room.startDate && room.endDate) {
     console.log(`Room ${room.name} is occupied from ${room.startDate} to ${room.endDate}`);
@@ -149,7 +163,11 @@ checkCalendar(room: Room): void {
     // Si la chambre n'est pas occupée, vous pouvez afficher un message indiquant qu'elle est disponible.
   }
 }
-
+private generateId(): number {
+  // Implémentez votre logique pour générer un identifiant unique ici
+  // Pour l'exemple, nous pourrions simplement retourner un nombre aléatoire
+  return Math.floor(Math.random() * 1000);
+}
 
   
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Reservation } from './private/model/reservation';
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
@@ -12,7 +12,7 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'my_project';
-
+  reservations: Reservation[] = []; 
   isSideNavCollapsed = false;
   screenWidth= 0;
 

@@ -56,26 +56,18 @@
                 <tbody>
                     <tr *ngFor="let event of events">
                         <td><input type="text" class="form-control" [(ngModel)]="event.title"></td>
-        <!-- Affichage de la couleur principale -->
-        <td><input type="color" [(ngModel)]="event.color.primary"></td>
-        <!-- Affichangge de la couleur secondaire -->
-        <td><input type="color" [(ngModel)]="event.color.secondary"></td>
-
-
-                        <!-- Utilisation du pipe date pour formater les dates -->
-        <td>
-            <input class="form-control" type="text" [(ngModel)]="event.start" [ngModelOptions]="{standalone: true}" placeholder="Start Date">
-        </td>
-        <td>
-            <input class="form-control" type="text" [(ngModel)]="event.end" [ngModelOptions]="{standalone: true}" placeholder="End Date">
-        </td>
-                        <!--Le bouton de suppression a été commenté car il n'est pas utilisé dans la section de gestion des événements -->
+                        <td><input type="color" [ngModel]="event.color?.primary" (ngModelChange)="updatePrimaryColor(event, $event)"></td>
+                        <td><input type="color" [ngModel]="event.color?.secondary" (ngModelChange)="updateSecondaryColor(event, $event)"></td>
+                        <td><input class="form-control" type="text" [ngModel]="event.start" [ngModelOptions]="{standalone: true}" placeholder="Start Date"></td>
+                        <td><input class="form-control" type="text" [ngModel]="event.end" [ngModelOptions]="{standalone: true}" placeholder="End Date"></td>
                         <td>
                             <button class="btn btn-danger" (click)="deleteEvent(event)">Delete</button>
                         </td> 
                     </tr>
                 </tbody>
             </table>
+           
+
         </div>
     </div>
 </div>

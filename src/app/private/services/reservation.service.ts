@@ -10,7 +10,7 @@ export class ReservationService {
   baseUrl = 'http://localhost:8083/api/example/reservation';
 
   constructor(private httpclient: HttpClient) { }
-  private reservations: Reservation[] = [];
+   reservations: Reservation[] = [];
   getAllReservations(): Observable<Reservation[]> {
     return this.httpclient.get<Reservation[]>(`${this.baseUrl}/reservation`);
 
@@ -18,8 +18,10 @@ export class ReservationService {
   deleteReservation(id: number): Observable<void> {
     return this.httpclient.delete<void>(`${this.baseUrl}/reservation/${id}`);
   }
-  addReservation(reservation: Reservation) {
+  addReservation(reservation: Reservation): void {
+    // Ajoutez la réservation à la liste des réservations
     this.reservations.push(reservation);
+    console.log('Reservation added:', reservation);
   }
 
   getReservations() {

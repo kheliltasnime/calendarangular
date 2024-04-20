@@ -7,9 +7,9 @@ import { Reservation } from '../../model/reservation';
   styleUrls: ['./benefit.component.css']
 })
 export class BenefitComponent {
-  reservations: Reservation[];
+  constructor(private reservationService: ReservationService) {}
 
-  constructor(private reservationService: ReservationService) {
-    this.reservations = this.reservationService.getReservations();
+  get reservations(): Reservation[] {
+    return this.reservationService.reservations;
   }
 }

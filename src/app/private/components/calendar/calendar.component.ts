@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input,OnInit } from '@angular/core';
 //import { CalendarView } from 'angular-calendar';
 import { Event } from '../../model/event';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-
+import { Reservation } from '../../model/reservation';
+import { ReservationService } from '../../services/reservation.service';
 @Component({
   selector: 'app-calendar',
  // standalone:true,
@@ -11,42 +12,45 @@ import { CalendarEvent, CalendarView } from 'angular-calendar';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+//@Input() reservations: Reservation[] = [];
+
+ 
+constructor(private reservationService: ReservationService) {}
+
+get reservations(): Reservation[] {
+  return this.reservationService.reservations;
+}
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Week;
-   // Renommez la propriété pour éviter les conflits
   calendarView = CalendarView;
   selectedEvent: CalendarEvent | null = null;
-
- 
-
-  setView(view: CalendarView) {
-    this.view = view;
-    console.log('Changer la vue du calendrier vers :', view);
-  }
-
-  getDateFormat(view: CalendarView): string {
-    switch (view) {
-      case CalendarView.Month:
-        return 'monthViewTitle';
-      case CalendarView.Week:
-        return 'weekViewTitle';
-      case CalendarView.Day:
-        return 'dayViewTitle';
-      default:
-        return 'monthViewTitle'; // Par défaut, utilisez le format de vue mensuelle
-    }
-  }
-  //events: CalendarEvent[] = [];
-  events: Event[] = [];
-  constructor() { }
+  events: CalendarEvent[] = [];
 
   ngOnInit(): void {
-    this.loadEvents();
+    this.convertReservationsToEvents();
   }
 
-  
- 
+  convertReservationsToEvents(): void {
+    this.events = this.reservations.map(reservation => ({
+      start: new Date(reservation.date_debut), // Convertir la date de début
+      end: new Date(reservation.date_fin), // Convertir la date de fin
+      title: reservation.room, // Utilisez la salle comme titre de l'événement
+      color: { primary: '#ad2121', secondary: '#FAE3E3' }
+    }));
+  }
+  updatePrimaryColor(event: CalendarEvent<any>, color: string): void {
+    if (event.color) {
+      event.color.primary = color;
+    }
+}
 
+updateSecondaryColor(event: CalendarEvent<any>, color: string): void {
+  if (event.color) {
+    event.color.secondary = color;
+  }
+}
+
+  
   loadEvents(): void {
     // Exemple de chargement d'événements
     this.events = [
@@ -72,13 +76,10 @@ export class CalendarComponent implements OnInit {
     // Logique pour ouvrir la modification/suppression de l'événement
   }
 
-  deleteEvent(eventToDelete: Event): void {
-    if (this.selectedEvent) {
-      this.events = this.events.filter(event => event !== this.selectedEvent);
-      // Remettre selectedEvent à null après suppression si nécessaire
-      this.selectedEvent = null;
-    }
+  deleteEvent(eventToDelete: CalendarEvent): void {
+    this.events = this.events.filter(event => event !== eventToDelete);
   }
+  
 
   addEvent(): void {
     const newEvent: Event = {
@@ -91,6 +92,22 @@ export class CalendarComponent implements OnInit {
     this.events.push(newEvent);
   }
 
- 
+  setView(view: CalendarView) {
+    this.view = view;
+    console.log('Changer la vue du calendrier vers :', view);
+  }
 
+  getDateFormat(view: CalendarView): string {
+    switch (view) {
+      case CalendarView.Month:
+        return 'monthViewTitle';
+      case CalendarView.Week:
+        return 'weekViewTitle';
+      case CalendarView.Day:
+        return 'dayViewTitle';
+      default:
+        return 'monthViewTitle'; // Par défaut, utilisez le format de vue mensuelle
+    }
+  }
+ 
 }
